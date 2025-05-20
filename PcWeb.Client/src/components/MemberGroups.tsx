@@ -15,13 +15,13 @@ const MemberGroups: React.FC = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ groupName })
+                body: JSON.stringify({ Name: groupName })
             });
 
             if (response.ok) {
                 const data = await response.json();
                 setGroupName("");
-                console.log(data.message);
+                console.log(data);
             }
             else {
                 const errorData = await response.json();
@@ -41,6 +41,7 @@ const MemberGroups: React.FC = () => {
                 <h2 className="title">List of groups</h2>
                 <form className="addGroup" onSubmit={handleCreateGroup}>
                     <input
+                        required
                         type="text"
                         name="Name"
                         maxLength={20}

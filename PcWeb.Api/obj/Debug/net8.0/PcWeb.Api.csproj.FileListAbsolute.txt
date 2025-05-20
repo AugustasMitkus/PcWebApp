@@ -134,3 +134,4 @@ C:\Users\augus\OneDrive\Desktop\environ\pc_web_app\PcWebApp\PcWeb.Api\obj\Debug\
 C:\Users\augus\OneDrive\Desktop\environ\pc_web_app\PcWebApp\PcWeb.Api\obj\Debug\net8.0\ref\PcWeb.Api.dll
 C:\Users\augus\OneDrive\Desktop\environ\pc_web_app\PcWebApp\PcWeb.Api\bin\Debug\net8.0\MinimalApis.Extensions.dll
 C:\Users\augus\OneDrive\Desktop\environ\pc_web_app\PcWebApp\PcWeb.Api\bin\Debug\net8.0\MiniValidation.dll
+c:\Users\augus\OneDrive\Desktop\environ\pc_web_app\PcWebApp\PcWeb.Api\obj\Debug\net8.0\PcWeb.Api.sourcelink.json

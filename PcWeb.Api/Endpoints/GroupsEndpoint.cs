@@ -29,8 +29,12 @@ public static class GroupsEndpoint
 
         g.MapPost("/", (CreateMemberGroupDto newMemberGroup, GroupDbContext dbContext) =>
         {
-
+            if (newMemberGroup is null)
+            {
+                return Results.NotFound("Name is missing probably");
+            }
             MemberGroup memberGroup = newMemberGroup.ToEntity();
+
 
             dbContext.MemberGroups.Add(memberGroup);
             dbContext.SaveChanges();
