@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj": {}
+    "c:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj": {
+    "c:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj",
+        "projectUniqueName": "c:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj",
         "projectName": "PcWeb.Api",
-        "projectPath": "C:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj",
+        "projectPath": "c:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj",
         "packagesPath": "C:\\Users\\augus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\obj\\",
+        "outputPath": "c:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
