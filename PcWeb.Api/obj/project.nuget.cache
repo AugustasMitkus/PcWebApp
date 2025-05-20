@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "208od7wAWUv5PtU/1ZKWt/26xbzT4hws/MwsMFZctMMEYID9gpaGt/eJOg9wp3HYzgdeMLbba49/RD+v/caAKA==",
+  "dgSpecHash": "lpnI8gPwQ3rzzucypfOiQDC8WtFvatDPNOnN/Ku2S8GIwAEaNdut0vbLMKH9u+bFik7/pxu3NNswg0Y1TnVdkg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj",
+  "projectFilePath": "C:\\Users\\augus\\OneDrive\\Desktop\\environ\\pc_web_app\\PcWebApp\\PcWeb.Api\\PcWeb.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\augus\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\augus\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.3\\microsoft.aspnetcore.openapi.8.0.3.nupkg.sha512",
