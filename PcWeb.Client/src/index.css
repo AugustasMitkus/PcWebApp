@@ -11,9 +11,8 @@ input {
 	border-radius: 3px;
 	margin-bottom: 15px;
 }
-body {
-  background-size:100%;
-  background-color: #ffb3b3;
+html,body {
+  background-color: #000000;
 
 }
 a {
@@ -24,11 +23,9 @@ a {
     display: flex;
 	width: 70%;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	min-height: 100vh;
 	padding: 30px;
-  background-color: #c0c0c0;
+  background-color: #b1b1b1;
   margin: 0 auto;
 }
 
@@ -78,4 +75,19 @@ Table {
 
 .memberSelect {
 	margin-bottom: 20px;
+}
+.trans2,
+.transaction {
+	display: flex; 
+	align-items: center;
+	flex-direction: column;
+	margin: 10px;
+}
+.transaction,.trans2 input {
+	margin: 10px;
+}
+.trans2 label {
+  width: 200px;
+  margin-right: 10px;
+  text-align: right;
 }

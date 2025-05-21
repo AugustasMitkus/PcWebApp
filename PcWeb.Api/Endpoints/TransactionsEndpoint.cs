@@ -37,7 +37,7 @@ public static class TransactionsEndpoint
             MemberTransaction transaction = newTransaction.ToEntity();
             dbContext.Transactions.Add(transaction);
             dbContext.SaveChanges();
-            return Results.CreatedAtRoute("GetTransaction", new { id = transaction.Id }, transaction.ToDto());
+            return Results.Ok();
         }
 
 

@@ -82,7 +82,6 @@ const MemberGroup : React.FC = () => {
     const handleAddMember = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            console.log(firstName, lastName, groupId)
             //add a member
             const response = await fetch("http://localhost:5109/members/", {
                 method: "POST",
@@ -149,6 +148,9 @@ const MemberGroup : React.FC = () => {
 
     return (
         <main className="container">
+            <button onClick={() => navigate("/")} className="groupBtn">
+                    Back
+            </button>
             <center>
                 <h2 className="title">{groupName}</h2>
                 <div className="membersTop">
@@ -158,7 +160,7 @@ const MemberGroup : React.FC = () => {
                         id="view"
                         value={pointOfView}
                         onChange={(e) => handleViewChange(Number(e.target.value))}
-                        style={{ width: "100%", height: "30px", padding: "5px", margin: "20px"}}
+                        style={{ width: "100%", height: "40px", padding: "5px", margin: "20px"}}
                     >
                         <option value={0}>General</option>
                         {members.map((member) => (
@@ -211,6 +213,15 @@ const MemberGroup : React.FC = () => {
             {pointOfView !== 0 && (
                 <button className="deleteBtn" type="button" onClick={handleDeleteMember}>Delete Current Member</button>
             )}
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+            </Table>
             </center>
         </main>
     )
