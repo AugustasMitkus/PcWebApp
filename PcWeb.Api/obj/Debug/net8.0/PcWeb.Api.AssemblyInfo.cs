@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PcWeb.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+41d3fd9ad4303b8b65700c60afab30cb96b7e11b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e80ba41d91bd2d5daa505be8b57bf37a555c43d")]
 [assembly: System.Reflection.AssemblyProductAttribute("PcWeb.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PcWeb.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

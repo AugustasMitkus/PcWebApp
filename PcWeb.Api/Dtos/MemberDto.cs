@@ -4,5 +4,5 @@ public record class MemberDto(
     int Id,
     string FirstName,
     string LastName,
-    int GroupId
+    decimal DebtSum
 );

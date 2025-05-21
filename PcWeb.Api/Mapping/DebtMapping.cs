@@ -70,8 +70,4 @@ public static class DebtMapping
         return updatedDebts;
     }
 
-    public static IEnumerable<OwedMoneyDto> ToDto(this List<OwedMoney> debts)
-    {
-        return debts.Select(d => new OwedMoneyDto(d.ToId, d.Amount));
-    }
 }

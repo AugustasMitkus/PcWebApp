@@ -13,19 +13,20 @@ public static class MembersEndpoint
     {
         var g = app.MapGroup("members");
 
-        //GET members of a certain group
+        //GET members of a certain group with the sum of debts
         g.MapGet("/group/{groupId}", (int groupId, GroupDbContext dbContext) =>
         {
-            var members = dbContext.Members.Where(m => m.GroupId == groupId).Select(m => m.ToDto());
+            var debts = dbContext.OwedMoney.ToList();
+            var members = dbContext.Members.Where(m => m.GroupId == groupId).Select(m => m.ToDto(debts));
 
             return members is null ? Results.NotFound() : Results.Ok(members);
         });
-        //GET a specific member
+        //GET a specific member and the sum of the debt that he has with others
         g.MapGet("/{id}", (int id, GroupDbContext dbContext) =>
         {
             Member? member = dbContext.Members.Find(id);
-
-            return member is null ? Results.NotFound() : Results.Ok(member.ToDto());
+            var debts = dbContext.OwedMoney.ToList();
+            return member is null ? Results.NotFound() : Results.Ok(member.ToDto(debts));
         })
         .WithName("GetMember");
         //POST a new member to the group
@@ -38,14 +39,20 @@ public static class MembersEndpoint
             dbContext.SaveChanges();
 
 
-            return Results.CreatedAtRoute("GetMember", new { id = member.Id }, member.ToDto());
+            return Results.Ok(member.Id);
         })
         .WithParameterValidation();
 
         g.MapDelete("/{id}", (int id, GroupDbContext dbContext) =>
         {
-            dbContext.Members.Where(member => member.Id == id).ExecuteDelete();
-
+            var debts = dbContext.OwedMoney.Where(debt => debt.FromId == id || debt.ToId == id).ToList();
+            dbContext.OwedMoney.RemoveRange(debts);
+            var member = dbContext.Members.Find(id);
+            if (member != null)
+            {
+                dbContext.Members.Remove(member);
+            }
+            dbContext.SaveChanges();
             return Results.NoContent();
         });
         

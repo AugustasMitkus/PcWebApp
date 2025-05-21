@@ -17,10 +17,12 @@ public static class DebtsEndpoint
         g.MapGet("/{id}", (int id, GroupDbContext dbContext) =>
         {
             Member? member = dbContext.Members.Find(id);
+            if (member == null) return Results.NotFound();
             var debts = dbContext.OwedMoney.Where(x => x.FromId == id || x.ToId == id).ToList();
-            return member is null ? Results.NotFound() : Results.Ok(member.ToIndebtedDto(debts)); //
+            var members = dbContext.Members.Where(x => x.GroupId == member.GroupId).ToList();
+            return Results.Ok(member.ToIndebted(debts, members));
         }).WithName("GetDebts");
-        
+
         //POST debts of a member with every single other member
         g.MapPost("/{id}", (int id, CreateDebtDto newDebt, GroupDbContext dbContext) =>
         {
@@ -35,7 +37,7 @@ public static class DebtsEndpoint
             dbContext.OwedMoney.UpdateRange(newDebts);
             dbContext.SaveChanges();
 
-            return Results.CreatedAtRoute("GetDebts", new { id = member.Id }, newDebts.ToDto());
+            return Results.Ok("Debts have been posted");
         });
         //Update each instance of debt with another member that a specific member has (done after making a transaction)
         g.MapPut("/{id}", (int id, UpdateDebtDto updatedDebt, GroupDbContext dbContext) =>

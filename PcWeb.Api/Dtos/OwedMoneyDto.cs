@@ -1,6 +1,8 @@
 namespace PcWeb.Api.Dtos;
 
 public record class OwedMoneyDto(
-    int MemberId,
-    decimal Amount
+    int Id,
+    string FirstName,
+    string LastName,
+    decimal DebtSum
 );

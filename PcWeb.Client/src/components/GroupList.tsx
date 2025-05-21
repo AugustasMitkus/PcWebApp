@@ -20,8 +20,6 @@ const GroupList: React.FC = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setMemberGroups(data);
-                    console.log(data)
-                    console.log(memberGroups)
                 }
 
                 else {
@@ -34,7 +32,7 @@ const GroupList: React.FC = () => {
             }
         };
     fetchGroups();
-}, [memberGroups]);
+}, []);
     //sends required data to the api so a group would be created
     const handleCreateGroup = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

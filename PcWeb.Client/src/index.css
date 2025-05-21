@@ -13,7 +13,7 @@ input {
 }
 body {
   background-size:100%;
-  background-color: #5a5a5a;
+  background-color: #ffb3b3;
 
 }
 a {
@@ -45,10 +45,10 @@ a {
     flex-direction: row;
     align-items: center;
 }
-
+.deleteBtn,
 .groupBtn {
     display: block;
-	width: 200px;
+	width: 150px;
 	padding: 15px;
 	cursor: pointer;
 	outline: none;
@@ -61,8 +61,21 @@ a {
 	margin: 15px;
 	opacity: 100%;
 }
+.deleteBtn {
+	background-color: red;
+}
 
 Table {
 	border: 1px solid #000000;
 	background-color: #555555a0;
+}
+
+.membersTop {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.memberSelect {
+	margin-bottom: 20px;
 }
