@@ -42,6 +42,14 @@ public static class DebtsEndpoint
         //Update each instance of debt with another member that a specific member has (done after making a transaction)
         g.MapPut("/{id}", (int id, UpdateDebtDto updatedDebt, GroupDbContext dbContext) =>
         {
+            if ((int)updatedDebt.Type == 1)
+            {
+                decimal total = updatedDebt.Distribution.Values.Sum();
+                if (Math.Abs(total - 100m) > 0.01m)
+        {
+            return Results.BadRequest($"Percentages must sum to 100%.");
+        }
+            }
             var member = dbContext.Members.Find(id);
             if (member is null) return Results.NotFound();
             List<Member> members = [.. dbContext.Members.Where(x => x.GroupId == member.GroupId)];

@@ -8,4 +8,6 @@ public record class CreateTransactionDto(
     [Required] int GroupId,
     [Required] int SenderId,
     decimal Amount,
-    DateTime SettledAt);
+    DateTime SettledAt,
+    Dictionary<int, decimal>? Distribution = null
+    );

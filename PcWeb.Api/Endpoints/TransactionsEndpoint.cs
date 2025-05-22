@@ -21,19 +21,9 @@ public static class TransactionsEndpoint
 
             return transactions.Count == 0 ? Results.NotFound() : Results.Ok(transactions);
         });
-        //GET transactions of a specific member
-        g.MapGet("/{id}", (int id, GroupDbContext dbContext) =>
-        {
-            var transactions = dbContext.Transactions.Where(m => m.SenderId == id).Include(t => t.Sender)
-                .Include(t => t.Group).Select(m => m.ToDto()).ToList();
-            return transactions is null || transactions.Count == 0 
-                ? Results.NotFound() 
-                : Results.Ok(transactions);
-        })
-        .WithName("GetTransaction");
         //POST a new transaction
         g.MapPost("/", (CreateTransactionDto newTransaction, GroupDbContext dbContext) =>
-        {         
+        {
             MemberTransaction transaction = newTransaction.ToEntity();
             dbContext.Transactions.Add(transaction);
             dbContext.SaveChanges();

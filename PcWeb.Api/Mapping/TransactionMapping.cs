@@ -9,12 +9,18 @@ public static class TransactionMapping
 {
     public static MemberTransaction ToEntity(this CreateTransactionDto transaction)
     {
+
+        decimal amount = transaction.Amount;
+        if ((int)transaction.Type == 2 && transaction.Distribution != null)
+        {
+            amount = transaction.Distribution.Values.Sum();
+        }
         return new MemberTransaction()
         {
             Type = transaction.Type,
             GroupId = transaction.GroupId,
             SenderId = transaction.SenderId,
-            Amount = transaction.Amount
+            Amount = amount
         };
     }
 

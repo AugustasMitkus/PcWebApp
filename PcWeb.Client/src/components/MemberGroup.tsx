@@ -10,6 +10,16 @@ type Member = {
     debtSum: number;
 }
 
+type Transaction = {
+    id: number;
+    type: string;
+    groupId: number;
+    firstName: string;
+    lastName: string;
+    amount: number,
+    settledAt: Date
+}
+
 const MemberGroup : React.FC = () => {
     const { groupId } = useParams();
     const [members, setMembers] = useState<Member[]>([]);
@@ -18,23 +28,23 @@ const MemberGroup : React.FC = () => {
     const [pointOfView, setPointOfView] = useState<number>(0);
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
     const navigate = useNavigate();
     useEffect(() => {
             //fetches a group and assigns its title/name
             const fetchGroup = async () => {
                 try {
-                    const response = await fetch(`http://localhost:5109/groups/${groupId}`)
-                    
+                    const response = await fetch(`http://localhost:5109/groups/${groupId}`);
+
 
                     if (response.ok) {
                         const data = await response.json();
                         setGroupName(data.name);
-
                     }
     
                     else {
                     const errorData = await response.json();
-                    console.error(errorData.error)
+                    console.error(errorData.error);
                 }
                 }
                 catch (error:any){
@@ -45,7 +55,7 @@ const MemberGroup : React.FC = () => {
             const fetchMembers = async () => {
                 try {
                     //fetches members of the group alongside their general debt amount (sum)
-                    const response = await fetch(`http://localhost:5109/members/group/${groupId}`)
+                    const response = await fetch(`http://localhost:5109/members/group/${groupId}`);
                     if (response.ok) {
                         const data = await response.json();
                         setMembers(data);
@@ -56,8 +66,29 @@ const MemberGroup : React.FC = () => {
                     console.error("Error:", error.message);
                 } 
             };
+            const fetchTransactions = async() => {
+                try {
+                    const response = await fetch(`http://localhost:5109/transactions/group/${groupId}`)
+                    if (response.ok) {
+                        const data = await response.json();
+                        const parsedData = data.map((t: any) => ({
+                            ...t,
+                            settledAt: new Date(t.settledAt)
+                        }));
+                        setTransactions(parsedData);
+                    }
+                    else {
+                        const errorData = await response.json();
+                        console.error(errorData.error);
+                    }
+                }
+                catch (error:any){
+                    console.error("Error:", error.message);
+                } 
+            };
         fetchGroup();
         fetchMembers();
+        fetchTransactions();
     }, [groupId]);
 
     const handleViewChange = async (value: number) => {
@@ -121,8 +152,9 @@ const MemberGroup : React.FC = () => {
     }
     const handleDeleteMember = async () => {
         try {
-            if (currentMembers.every(member => member.debtSum !== 0)){
-                throw alert("There are unsettled debts for the current member!")
+            if (currentMembers.some(member => member.debtSum !== 0)){
+                alert("There are unsettled debts for the current member!");
+                return;
             }
             //deletes the member but only if all the debts have been settled
             const response = await fetch(`http://localhost:5109/members/${pointOfView}`, {
@@ -167,7 +199,7 @@ const MemberGroup : React.FC = () => {
                             <option key={member.id} value={member.id}>{member.firstName} {member.lastName}</option>
                         ))}
                     </select>
-                    <button type="button" className="groupBtn" name="transaction" onClick={() => handleTransactionRedirect(Number(groupId))}>Make a transaction</button>
+                    {members.length >1 && (<button type="button" className="groupBtn" name="transaction" onClick={() => handleTransactionRedirect(Number(groupId))}>Make a transaction</button>)}
                 </div>
                 <Table striped bordered hover>
                     <thead>
@@ -176,7 +208,6 @@ const MemberGroup : React.FC = () => {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Debt</th>
-                            <th>Settle</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -186,9 +217,6 @@ const MemberGroup : React.FC = () => {
                                 <td>{member.firstName}</td>
                                 <td>{member.lastName}</td>
                                 <td>{member.debtSum}</td>
-                                {pointOfView !== 0 && member.debtSum !== 0 &&(
-                                    <td style={{ cursor: "pointer" }}>Settle</td>
-                                )} 
                             </tr>
                         ))}
                     </tbody>
@@ -213,14 +241,26 @@ const MemberGroup : React.FC = () => {
             {pointOfView !== 0 && (
                 <button className="deleteBtn" type="button" onClick={handleDeleteMember}>Delete Current Member</button>
             )}
+            <h4>Recent Transactions</h4>
             <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>Type</th>
                         <th>Name</th>
                         <th>Amount</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {transactions.map((trans) =>(
+                        <tr key={trans.id}>
+                            <td>{trans.type}</td>
+                            <td>{trans.firstName} {trans.lastName}</td>
+                            <td>{trans.amount}</td>
+                            <td>{trans.settledAt.toLocaleDateString()}</td>
+                        </tr>
+                    ))}
+                </tbody>
             </Table>
             </center>
         </main>

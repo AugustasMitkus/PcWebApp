@@ -14,7 +14,7 @@ const Transaction: React.FC = () => {
     const [members, setMembers] = useState<Member[]>([]);
     const [tempMembers, setTempMembers] = useState<Member[]>([]);
     const [sender, setSender] = useState<number>(0)
-    const [transType, setTransType] = useState<number>(0);
+    const [transType, setTransType] = useState<number>(1);
     const navigate = useNavigate();
     useEffect (() => {
         const fetchMembers = async () => {
@@ -27,9 +27,10 @@ const Transaction: React.FC = () => {
                         setTempMembers(data);
                         if (data.length > 0) {
                         setSender(data[0].id);
+                        setTempMembers(data.filter((member: { id: any; }) => member.id !== data[0].id));
+                        }
                 }
                     }
-                }
                 catch (error:any){
                     console.error("Error:", error.message);
                 } 
@@ -65,10 +66,11 @@ const Transaction: React.FC = () => {
                 });
             }
             const amount = formData.get("amount");
+            //creates a transaction
             const response = await fetch("http://localhost:5109/transactions", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({type: transType, groupId: groupId, senderId: sender, amount: amount})
+                body: JSON.stringify({type: transType, groupId: groupId, senderId: sender, amount: amount, distribution: formValues})
             });
             if (response.ok) {
                 const debtUpdateResponse = await fetch(`http://localhost:5109/debts/${sender}`,{
